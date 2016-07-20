@@ -1,4 +1,4 @@
-from random import choice
+from random import sample
 
 from flask import Flask, render_template, request
 
@@ -18,7 +18,7 @@ AWESOMENESS = [
 def start_here():
     """Homepage."""
 
-    return "Hi! This is the home page."
+    return "Hi! This is the <a href='/hello'>home page</a>."
 
 
 @app.route('/hello')
@@ -34,7 +34,7 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    compliment = sample(AWESOMENESS, 3)
 
     return render_template("compliment.html",
                            person=player,
@@ -51,16 +51,16 @@ def show_madlib_form():
     else:
         return render_template("game.html")
 
-@app.route('/madlib')
+@app.route('/madlib', methods=["POST"])
 def show_madlib():
     """Output final madlib. """
 
-    person = request.args.get("person")
-    noun = request.args.get("noun")
-    color = request.args.get("color")
-    adjective = request.args.get("adjective")
-    number = request.args.get("number")
-    car = request.args.get("car")
+    person = request.form.get("person")
+    noun = request.form.get("noun")
+    color = request.form.get("color")
+    adjective = request.form.get("adjective")
+    number = request.form.get("number")
+    car = request.form.get("car")
 
     return render_template("madlib.html",
                             person=person,
