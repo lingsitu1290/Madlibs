@@ -5,7 +5,14 @@
 {% block CSS %} <link rel="stylesheet" href="/static/madlibs.css"> {% endblock %}
 
 {% block CONTENT %} 
-There once was a {{ color }} {{ noun }} sitting in the Hackbright Lab. When {{ person }} went to pick it up in a {{ car }}, it burst into {{ number }} flames in a totally {{ adjective }} way.
+There once was a 
+    {% if color %} 
+        {% for value in color %} 
+            {{ value }} 
+        {% endfor %} 
+    {% endif %}
+    {{ noun }} 
+sitting in the Hackbright Lab. When {{ person }} went to pick it up in a {{ car }}, it burst into {{ number }} flames in a totally {{ adjective }} way.
 
 {% endblock %}
 
